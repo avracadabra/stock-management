@@ -1,0 +1,1 @@
+-e git+https://github.com/AnyBlok/anyblok_wms_base@master#egg=anyblok-wms-base
