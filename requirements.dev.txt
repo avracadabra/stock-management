@@ -4,3 +4,4 @@ ipdbplugin
 ipython
 pylint
 black
+pre-commit

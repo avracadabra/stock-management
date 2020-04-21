@@ -31,6 +31,7 @@ class Awb_http(Blok):
         config.add_route("root", "/")
         config.add_route("example_list", "/example")
         config.add_route("example", "/example/{id}")
+        config.add_route("container_list", "/api/containers")
         config.scan(cls.__module__ + ".views")
 
     def update(self, latest):
