@@ -63,7 +63,7 @@ lint: ## check style with flake8
 	flake8 bulk_management
 
 test: ## run tests
-	ANYBLOK_CONFIG_FILE=app.test.cfg py.test -v -s bulk_management
+	ANYBLOK_CONFIG_FILE=app.test.cfg py.test -vvv -s bulk_management
 
 documentation: ## generate documentation
 	anyblok_doc -c app.test.cfg --doc-format RST --doc-output doc/source/apidoc.rst
