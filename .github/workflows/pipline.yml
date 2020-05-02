@@ -61,8 +61,5 @@ jobs:
       env:
         APP_CONFIG: "ci"
       run: make test
-    - name: Coveralls GitHub Action
-      uses: coverallsapp/github-action@v1.1.1
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        path-to-lcov: ./coverage
+    - name: Coveralls Python
+      uses: AndreMiras/coveralls-python-action@v20200413
