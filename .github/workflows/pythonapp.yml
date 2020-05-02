@@ -1,0 +1,48 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Python application
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Setup PostgreSQL
+      uses: Harmon758/postgresql-action@v1.0.0
+      with:
+        # Version of PostgreSQL to use
+        postgresql version: latest
+        # POSTGRES_DB - name for the default database that is created
+        postgresql db: aaaaa_stock_test 
+        # POSTGRES_USER - create the specified user with superuser power
+        postgresql user: avracadabra 
+        # POSTGRES_PASSWORD - superuser password
+        postgresql password: secret 
+    - name: Install dependencies
+      run: make setup-tests
+    - name: Lint with flake8 / black...
+      run: make lint
+    - name: Test with pytest
+      env:
+        APP_CONFIG: "ci"
+      run: make test
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@v1.1.1
+      with:
+        # 
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        # Path to lcov file
+        path-to-lcov: ./coverage
