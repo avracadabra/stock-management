@@ -19,7 +19,9 @@ jobs:
       with:
         python-version: 3.8
     - name: Install dependencies
-      run: make setup-tests
+      run: |
+        pip install --upgrade pip wheel
+        pip install .
     - name: Lint with flake8 / black...
       run: make lint
 
@@ -49,6 +51,8 @@ jobs:
       with:
         python-version: 3.8
     - name: Install dependencies
+      env:
+        APP_CONFIG: "ci"
       run: make setup-tests
     - name: Test with pytest
       env:
