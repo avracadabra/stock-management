@@ -1,3 +1,12 @@
+.. image:: https://github.com/avracadabra/stock/workflows/pipline/badge.svg?branch=master
+   :target: https://github.com/avracadabra/stock/actions?query=branch%3Amaster
+   :alt: Build status
+
+
+.. image:: https://coveralls.io/repos/github/avracadabra/stock/badge.svg?branch=master
+   :target: https://coveralls.io/github/avracadabra/stock?branch=master
+   :alt: Coverage Status
+
 =================================
 Avracadabra bulk stock management
 =================================
