@@ -24,7 +24,7 @@ setup-tests: ## install python project dependencies for tests
 	pip install --upgrade pip wheel
 	pip install --upgrade -r requirements.test.txt
 	pip install .
-	anyblok_createdb -c app.test.cfg || anyblok_updatedb -c app.test.cfg
+	anyblok_createdb -c app.$(or ${APP_CONFIG}, test).cfg || anyblok_updatedb -c app.$(or ${APP_CONFIG}, test).cfg
 
 setup-dev: ## install python project dependencies for development
 	pip install --upgrade pip wheel
@@ -60,10 +60,12 @@ clean-test: ## remove test artifacts
 	rm -f .coverage
 
 lint: ## check style with flake8
-	flake8 bulk_management
+	pip install -U pip wheel pre-commit
+	pre-commit install --install-hooks
+	pre-commit run --all-files --show-diff-on-failure
 
 test: ## run tests
-	ANYBLOK_CONFIG_FILE=app.test.cfg py.test -vvv -s bulk_management
+	ANYBLOK_CONFIG_FILE=app.$(or ${APP_CONFIG}, test).cfg py.test -vvv -s avracadabra
 
 documentation: ## generate documentation
 	anyblok_doc -c app.test.cfg --doc-format RST --doc-output doc/source/apidoc.rst

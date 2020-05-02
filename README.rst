@@ -1,12 +1,11 @@
-===========================
-Avracadabra bulk management
-===========================
+=================================
+Avracadabra bulk stock management
+=================================
 
 This project will provide bloks that add provide HTTP interfaces to AWB.
 
 
 * Free software: Mozilla Public License Version 2.0
-* Documentation: https://bulk-management.readthedocs.io.
 
 
 Features
