@@ -25,7 +25,7 @@ jobs:
     - name: Lint with flake8 / black...
       run: make lint
 
-  test:
+  unit:
     runs-on: ubuntu-latest
     # Service containers to run with `container-job`
     services:
@@ -46,7 +46,6 @@ jobs:
         ports:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.8
@@ -63,3 +62,27 @@ jobs:
       run: make test
     - name: Coveralls Python
       uses: AndreMiras/coveralls-python-action@v20200413
+
+  integration:
+    needs: unit
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: avracadabra/QA
+        ref: master
+    - uses: actions/checkout@v2
+      with:
+        path: stock
+    - uses: actions/checkout@v2
+      with:
+        repository: avracadabra/api-gateway
+        ref: master
+        path: api-gateway
+    - uses: actions/checkout@v2
+      with:
+        repository: avracadabra/backend
+        ref: master
+        path: backend
+    - name: Build docker images
+      run: |
+        ls -la
